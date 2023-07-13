@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/index.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">Solver</div>
+            {% if request.session.logdin %}
+                <div class="prev">
+                    <a href="{{previous}}"><img src="{% static 'images/prev.png' %}" alt=""></a>
+                </div>
+                <div class="next">
+                    <a href="{{next}}"><img src="{% static 'images/next.png' %}" alt=""></a>
+                </div>
+                <div class="login"> 
+                    <a href="/logout/"><button id="login">Logout</button></a>
+                </div>
+            {% else %}
+                <div class="login"> 
+                    <a href="/login/"><button id="login">Login</button></a>
+                </div>
+            {% endif %}
+        </nav>
+
+        <div class="content">
+            {% if request.session.logdin %}
+                <div class="left">
+                    {% for question in questions %}
+                        <div class="leftt">
+                            <div class="title">{{ question.title }}</div>
+                            <div class="question">{{ question.question }}</div>
+                            <div class="testcases">
+                                <div class="example">
+                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
+                                </div>
+                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
+                                <br>
+                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
+                            </div>
+                            <div class="testcases">
+                                <div class="example">
+                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
+                                </div>
+                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
+                                <br>
+                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
+                            </div>
+                            <div class="testcases">
+                                <div class="example">
+                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
+                                </div>
+                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
+                                <br>
+                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="right">
+                    <div class="rightt">
+                        <div class="options">
+                            <div class="language">
+                                <select name="select" id="selection" onchange="printSelectedOption()">
+                                    <optgroup label="Languages">
+                                        <option data-format="mp4">Languages</option>
+                                        <option data-format="mp4">C</option>
+                                        <option data-format="mp4">C++</option>
+                                        <option data-format="mp4">Java</option>
+                                        <option data-format="mp4">Python</option>
+                                        <option data-format="mp4">JavaScript</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="reset">
+                                <img style="height: 30px; width: 30px; cursor: pointer;" src="/static/images/reset.png" alt="">
+                            </div>
+                        </div>
+                        <div class="code">
+                            <div class="line-numbers">
+                                <pre id="lineNumbers"></pre>
+                            </div>
+                            <textarea id="myTextarea" style="width: 100%; height: 70vh;"></textarea>
+                        </div>
+                        <div class="run">
+                            <button id="runbutton">Run</button>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="slove">
+                    <h1>Login to Solve Problems</h1>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

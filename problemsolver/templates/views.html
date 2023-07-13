@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/styleviews.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">Solver</div>
+            <div class="prev">
+                <img src="{% static 'style/images/prev.png' %}" alt="">
+            </div>
+            <div class="next">
+                <img src="{% static '/images/next.png' %}" alt="">
+            </div>
+            <div class="login">
+                <button id="login">Login</button>
+            </div>
+            <div class="logout">
+                <button id="logout">Logout</button>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="edit">
+                <div class="edit">
+                    <button id="editbutton">Edit</button>
+                    <button id="deletebutton">Delete</button>
+                </div>
+            </div>
+            <div class="left">
+                <div class="leftt">
+                    <div class="title">{{question.title}}</div>
+                    <div class="question">{{question.question}}</div>
+                    {% for test in testcases %}
+                        <div class="testcases">
+                            <div class="example">
+                                <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example {{forloop.counter}}:- </p>
+                            </div>
+                            <p style="display: inline-block;">Input: </p> <span>{{test.input}}</span>
+                            <br>
+                            <p style="display: inline-block;">Output: </p>: <span>{{test.output}}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

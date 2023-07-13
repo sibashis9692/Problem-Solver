@@ -1,0 +1,135 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.container {
+    background-color: #2b2b2b;
+}
+
+nav {
+    height: 10vh;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.logo {
+    cursor: pointer;
+    color: white;
+    font-size: 30px;
+    width: 30px;
+    font-weight: bold;
+}
+
+.prev {
+    cursor: pointer;
+    margin-left: 190px;
+}
+
+.next {
+    cursor: pointer;
+}
+
+.login {
+    cursor: pointer;
+}
+
+.logout {
+    cursor: pointer;
+}
+
+#login{
+    height: 6vh;
+    width: 9vw;
+    border: 0px solid white;
+    border-radius: 9px;
+    background-color: #3effea;
+}
+
+#logout{
+    height: 6vh;
+    width: 9vw;
+    border: 0px solid white;
+    border-radius: 9px;
+    background-color: #3effea;
+}
+.content {
+    background-color: white;
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.left {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.reset{
+    background-color: #3effea;
+    border-radius: 10px;
+}
+.leftt {
+    height: 100%;
+    width: 80%;
+    background-color: #ffffff;
+}
+.title {
+    height: 5vh;
+    width: 100%;
+    background: #eeeded;
+    font-family: sans-serif;
+    font-weight: bolder;
+    margin-top: 7vh;
+    font-size: 20px;
+}
+
+.question {
+    background-color: #eeeded;
+    margin-top: 15px;
+    font-family: system-ui;
+    font-weight: 600;
+    line-height: 29px;
+    margin-bottom: 4vh;
+}
+
+.example {
+    margin-bottom: 3vh;
+}
+
+p {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: system-ui;
+}
+
+span {
+    font-family: system-ui;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.testcases {
+    margin-bottom: 3vh;
+    background-color: #eeeded;
+}
+
+.edit{
+    display: flex;
+    align-items: center;
+    margin-top: 4vh;
+}
+#editbutton, #deletebutton{
+    height: 6vh;
+    width: 9vw;
+    background-color: #3effea;
+    border-radius: 9px;
+    border: 0px solid rgb(255, 255, 255);
+    margin-right: 1vw;
+}

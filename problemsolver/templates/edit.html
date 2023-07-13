@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/styleviews.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">Solver</div>
+            <div class="prev">
+                <img src="{% static 'style/images/prev.png' %}" alt="">
+            </div>
+            <div class="next">
+                <img src="{% static '/images/next.png' %}" alt="">
+            </div>
+            <div class="login">
+                <button id="login">Login</button>
+            </div>
+            <div class="logout">
+                <button id="logout">Logout</button>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="left">
+                <div class="leftt">
+                    <form action="/edit/" method="post">
+                        {% csrf_token %}
+                        <label for="title" class="title" >Question title</label></br>
+                        <input type="text" id="inputtit" placeholder="Enter the title ..." name="title" style="height: 10vh; width: 100%;" value={{data.title}}></br>
+
+                        <label for="title" class="title" >Question</label></br>
+                        <textarea type="text" class="question" placeholder="Enter the question ..." name="question" style="height: 25vh; width: 100%;" value={{data.question}}></textarea></br>
+
+                        <p>Input for Testcases</p>
+                        <label for="title" class="title" ></label></br>
+                        <input type="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 10vh; width: 100%;"></br>
+
+                        <label for="title" class="title" ></label></br>
+                        <input type="text" id="inputtit" placeholder="Output for test case: " name="output" style="height: 10vh; width: 100%;"></br>
+
+                        <button type="submit" style="height: 5vh; width: 10vw;">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>

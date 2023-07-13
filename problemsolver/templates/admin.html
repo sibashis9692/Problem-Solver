@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/styleadmin.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">Solver</div>
+            {% if request.session.logdin %}
+                <div class="login" style="margin-left: 30vw"> 
+                    <a href="/logout/"><button id="login">Logout</button></a>
+                </div>
+            {% else %}
+                <div class="login"> 
+                    <a href="/login/"><button id="login">Login</button></a>
+                </div>
+            {% endif %}
+        </nav>
+
+
+        <div class="content">
+            {% if request.session.logdin %}
+                    <div class="questions" >
+                    <a href="/addQuestion/"><button id="editbutton" style="margin-top: 4vh;">Add question</button></a>
+                    {% for question in questions %}
+
+                            <div class="question" onclick="window.location.href='/views/{{question.sno}}'">
+                                <p class="ques">{{ forloop.counter }}. {{ question.title }}</p>
+                                <div class="edit">
+                                    <a href="/edit/{{question.sno}}"><button id="editbutton">Edit</button></a>
+                                    <a href="/delete/{{question.sno}}"><button id="deletebutton">Delete</button></a>
+                                </div>
+                            </div> 
+                    {% endfor %} 
+                    </div>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
