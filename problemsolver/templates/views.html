@@ -11,33 +11,24 @@
 <body>
     <div class="container">
         <nav>
-            <div class="logo">Solver</div>
-            <div class="prev">
-                <img src="{% static 'style/images/prev.png' %}" alt="">
-            </div>
-            <div class="next">
-                <img src="{% static '/images/next.png' %}" alt="">
-            </div>
-            <div class="login">
-                <button id="login">Login</button>
-            </div>
-            <div class="logout">
-                <button id="logout">Logout</button>
-            </div>
+            <div class="logo" onclick="window.location.href='/'">Solver</div>
+            {% if request.session.logdin %}
+                <div class="login" style="margin-left: 30vw"> 
+                    <a href="/logout/"><button id="login">Logout</button></a>
+                </div>
+            {% else %}
+                <div class="login"> 
+                    <a href="/login/"><button id="login">Login</button></a>
+                </div>
+            {% endif %}
         </nav>
 
         <div class="content">
-            <div class="edit">
-                <div class="edit">
-                    <button id="editbutton">Edit</button>
-                    <button id="deletebutton">Delete</button>
-                </div>
-            </div>
             <div class="left">
                 <div class="leftt">
                     <div class="title">{{question.title}}</div>
                     <div class="question">{{question.question}}</div>
-                    {% for test in testcases %}
+                    {% for test in testcase %}
                         <div class="testcases">
                             <div class="example">
                                 <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example {{forloop.counter}}:- </p>

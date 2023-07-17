@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <nav>
-            <div class="logo">Solver</div>
+            <div class="logo" onclick="window.location.href='/'">Solver</div>
             {% if request.session.logdin %}
                 <div class="login" style="margin-left: 30vw"> 
                     <a href="/logout/"><button id="login">Logout</button></a>

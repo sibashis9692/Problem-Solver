@@ -3,6 +3,27 @@
     margin: 0px;
 }
 
+.alert {
+    padding: 10px;
+    background-color: #a25a4e;
+    color: white;
+    border-radius: 5px;
+    margin: 0px 0px 10px 0px;
+    min-height: 3vh;
+    overflow: scroll;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 .container {
     background-color: #2b2b2b;
 }
@@ -86,7 +107,7 @@ nav {
     height: 100%;
     width: 50%;
     background-color: #ffffff;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .title {

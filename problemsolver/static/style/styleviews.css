@@ -133,3 +133,9 @@ span {
     border: 0px solid rgb(255, 255, 255);
     margin-right: 1vw;
 }
+
+input{
+    background-color: #eeeded;
+    font-family: system-ui;
+    font-weight: 600;
+}

@@ -11,40 +11,56 @@
 <body>
     <div class="container">
         <nav>
-            <div class="logo">Solver</div>
-            <div class="prev">
-                <img src="{% static 'style/images/prev.png' %}" alt="">
-            </div>
-            <div class="next">
-                <img src="{% static '/images/next.png' %}" alt="">
-            </div>
-            <div class="login">
-                <button id="login">Login</button>
-            </div>
-            <div class="logout">
-                <button id="logout">Logout</button>
-            </div>
+            <div class="logo" onclick="window.location.href='/'">Solver</div>
+            {% if request.session.logdin %}
+                <div class="login" style="margin-left: 30vw"> 
+                    <a href="/logout/"><button id="login">Logout</button></a>
+                </div>
+            {% else %}
+                <div class="login"> 
+                    <a href="/login/"><button id="login">Login</button></a>
+                </div>
+            {% endif %}
         </nav>
 
         <div class="content">
             <div class="left">
                 <div class="leftt">
-                    <form action="/edit/" method="post">
+                    <form action="/edit/{{ data.sno }}" method="post">
                         {% csrf_token %}
+                        <button type="submit" style="height: 5vh; width: 10vw; display: inherit; margin-bottom: 5vh;">Submit question</button>
+
                         <label for="title" class="title" >Question title</label></br>
-                        <input type="text" id="inputtit" placeholder="Enter the title ..." name="title" style="height: 10vh; width: 100%;" value={{data.title}}></br>
+                        <input type="text" id="inputtit" placeholder="Enter the title ..." name="title" style="height: 10vh; width: 100%;" value="{{data.title}}"></br>
 
                         <label for="title" class="title" >Question</label></br>
-                        <textarea type="text" class="question" placeholder="Enter the question ..." name="question" style="height: 25vh; width: 100%;" value={{data.question}}></textarea></br>
+                        <textarea type="text" class="question" placeholder="Enter the question ..." name="question" style="height: 25vh; width: 100%;">{{data.question}}</textarea></br>
+                    </form>
+                    {% for testcase in testcases %}
+                    <form method="post" action="/edittestcase/{{testcase.questionId}}/{{testcase.sno}}">
+                        {% csrf_token %}
+                        <p>Example: {{forloop.counter}}</p>
+                        <label for="inputtit" class="title"></label><br>
+                        <input type="text" id="inputtit" placeholder="Input for test case:" name="input" style="height: 10vh; width: 100%;" value="{{testcase.input}}"><br>
+                      
+                        <label for="outputtit" class="title"></label><br>
+                        <input type="text" id="outputtit" placeholder="Output for test case:" name="output" style="height: 10vh; width: 100%;" value="{{testcase.output}}"><br>
+                      
+                        <button type="submit" style="height: 5vh; width: 10vw; display: inherit; margin-bottom: 5vh; display: inline-block;">Submit Example {{forloop.counter}}</button>
+                        <button style="height: 5vh; width: 10vw; display: inherit; margin-bottom: 5vh; display: inline-block;" formaction="/deletetestcase/{{testcase.questionId}}/{{testcase.sno}}">Delete Example {{forloop.counter}}</button>
+                      </form>
+                      
+                    {% endfor %}
 
-                        <p>Input for Testcases</p>
+                    <form method="post" action="/addtestcase/{{ data.sno }}">
+                        {% csrf_token %}
+                        <p>Add Elample</p>
                         <label for="title" class="title" ></label></br>
-                        <input type="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 10vh; width: 100%;"></br>
+                        <input required ="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 10vh; width: 100%;" value="{{testcase.input}}"></br>
 
                         <label for="title" class="title" ></label></br>
-                        <input type="text" id="inputtit" placeholder="Output for test case: " name="output" style="height: 10vh; width: 100%;"></br>
-
-                        <button type="submit" style="height: 5vh; width: 10vw;">Submit</button>
+                        <input required ="text" id="inputtit" placeholder="Output for test case: " name="output" style="height: 10vh; width: 100%;" value="{{testcase.output}}"></br>
+                        <button style="height: 5vh; width: 10vw; display: inherit; margin-bottom: 5vh; display: inline-block;">Add Example {{forloop.counter}}</button>
                     </form>
                 </div>
             </div>
@@ -53,7 +69,6 @@
     </div>
 </body>
 <script>
-
 </script>
 
 </html>

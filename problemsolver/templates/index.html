@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <nav>
-            <div class="logo">Solver</div>
+            <div class="logo" onclick="window.location.href='/'">Solver</div>
             {% if request.session.logdin %}
                 <div class="prev">
                     <a href="{{previous}}"><img src="{% static 'images/prev.png' %}" alt=""></a>
@@ -36,30 +36,16 @@
                         <div class="leftt">
                             <div class="title">{{ question.title }}</div>
                             <div class="question">{{ question.question }}</div>
-                            <div class="testcases">
-                                <div class="example">
-                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
+                            {% for testcase in testcases %}
+                                <div class="testcases">
+                                    <div class="example">
+                                        <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example {{forloop.counter}}:- </p>
+                                    </div>
+                                    <p style="display: inline-block;">Input: </p> <span>{{testcase.input}}</span>
+                                    <br>
+                                    <p style="display: inline-block;">Output: </p>: <span>{{testcase.output}}</span>
                                 </div>
-                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
-                                <br>
-                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
-                            </div>
-                            <div class="testcases">
-                                <div class="example">
-                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
-                                </div>
-                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
-                                <br>
-                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
-                            </div>
-                            <div class="testcases">
-                                <div class="example">
-                                    <p style="font-size: 15px; font-weight: bold; font-family: system-ui;">Example 1:- </p>
-                                </div>
-                                <p style="display: inline-block;">Input: </p> <span>=[[1,2],[2,3],[5],[0],[5],[],[]]</span>
-                                <br>
-                                <p style="display: inline-block;">Output: </p>: <span>[2,4,5,6]</span>
-                            </div>
+                            {% endfor %}
                         </div>
                     {% endfor %}
                 </div>
@@ -67,29 +53,55 @@
                     <div class="rightt">
                         <div class="options">
                             <div class="language">
-                                <select name="select" id="selection" onchange="printSelectedOption()">
+                                <select name="select" id="selection" onchange="getSelectedOption()" required>
                                     <optgroup label="Languages">
-                                        <option data-format="mp4">Languages</option>
-                                        <option data-format="mp4">C</option>
-                                        <option data-format="mp4">C++</option>
-                                        <option data-format="mp4">Java</option>
-                                        <option data-format="mp4">Python</option>
-                                        <option data-format="mp4">JavaScript</option>
+                                        <option data-format="language" disabled>Languages</option>
+                                        {% if language != ""%}
+                                            <option data-format="language" selected>{{language}}</option>
+                                        {% endif %}
+                                        <option data-format="language">C</option>
+                                        <option data-format="language">C++</option>
+                                        <option data-format="language">Java</option>
+                                        <option data-format="language">Python</option>
+                                        <option data-format="language">JavaScript</option>
+                                        <option data-format="language">C#</option>
+                                        <option data-format="language">Go</option>
+                                        <option data-format="language">Kotlin</option>
                                     </optgroup>
                                 </select>
-                            </div>
-                            <div class="reset">
-                                <img style="height: 30px; width: 30px; cursor: pointer;" src="/static/images/reset.png" alt="">
                             </div>
                         </div>
                         <div class="code">
                             <div class="line-numbers">
                                 <pre id="lineNumbers"></pre>
                             </div>
-                            <textarea id="myTextarea" style="width: 100%; height: 70vh;"></textarea>
+                            <textarea id="myTextarea" style="width: 98%; height: 45vh;" required>{{code}}</textarea>
                         </div>
-                        <div class="run">
-                            <button id="runbutton">Run</button>
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert" style="background-color: {{b_color}};">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                <p>{{m_title}}</p>
+                                <div class="errormessage" style="height: 100%; margin-top: 5px;">
+                                    <pre>{{m_output}}<pre>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="userinput">
+                            <form method="post" action="/">
+                                {% csrf_token %}
+                                <label for="title" class="title" ></label></br>
+                                <input type ="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 7vh; width: 99%;" value="{{testcase.input}}" required></br>
+        
+                                <label for="title" class="title" ></label></br>
+                                <input type ="text" id="inputtit" placeholder="Output for test case: " name="output" style="height: 7vh; width: 99%;" value="{{testcase.output}}" required></br>
+                                <input type="hidden" id="language" name="language">
+                                <input type="hidden" id="code" name="code">
+                                <div class="run">
+                                    <button id="runbutton" onclick="submitForm()">Run</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -102,8 +114,6 @@
 
     </div>
 </body>
-<script>
-
-</script>
+<script src="{% static 'javascript/index.js' %}"></script>
 
 </html>
