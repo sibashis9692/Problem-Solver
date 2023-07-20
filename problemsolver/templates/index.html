@@ -53,7 +53,7 @@
                     <div class="rightt">
                         <div class="options">
                             <div class="language">
-                                <select name="select" id="selection" onchange="getSelectedOption()" required>
+                                <select name="select" id="selection" required>
                                     <optgroup label="Languages">
                                         <option data-format="language" disabled>Languages</option>
                                         {% if language != ""%}
@@ -92,22 +92,20 @@
                             <form method="post" action="/">
                                 {% csrf_token %}
                                 <label for="title" class="title" ></label></br>
-                                <input type ="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 7vh; width: 99%;" value="{{testcase.input}}" required></br>
-        
-                                <label for="title" class="title" ></label></br>
-                                <input type ="text" id="inputtit" placeholder="Output for test case: " name="output" style="height: 7vh; width: 99%;" value="{{testcase.output}}" required></br>
+                                <input type ="text" id="inputtit" placeholder="Input for test case: " name="input" style="height: 7vh; width: 99%;" required></br>
+
                                 <input type="hidden" id="language" name="language">
                                 <input type="hidden" id="code" name="code">
-                                <div class="run">
-                                    <button id="runbutton" onclick="submitForm()">Run</button>
-                                </div>
                             </form>
+                        </div>
+                        <div class="run">
+                            <button id="runbutton" onclick="submitForm()">Run</button>
                         </div>
                     </div>
                 </div>
             {% else %}
                 <div class="slove">
-                    <h1>Login to Solve Problems</h1>
+                    <img id="image" src="{% static '/images/wallpaper.jpg/'%}" alt="">
                 </div>
             {% endif %}
         </div>

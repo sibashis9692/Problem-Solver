@@ -1,9 +1,8 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect
 from django.contrib import messages
 from Home.models import User,problems, testcases
 from django.contrib.auth.hashers import *
 import math
-import requests
 from Home.apicall import data
 # Create your views here.
 
@@ -32,56 +31,34 @@ def index(request):
             language=request.POST.get("language")
             code=request.POST.get("code")
             input=request.POST.get("input")
-            output=request.POST.get("output")
             code=code
-            language=language
+            input
             if(language == "C"):
-                compilerId = 11
+                language = "c"
             elif(language == "C#"):
-                compilerId = 86
+                language = "csharp"
             elif(language == "C++"):
-                compilerId = 11
+                language = "cpp17"
             elif(language == "Go"):
-                compilerId = 114
+                language = "go"
             elif(language == "Java"):
-                compilerId = 10
+                language = "java"
             elif(language == "JavaScript"):
-                compilerId = 35
+                language = "nodejs"
             elif(language == "Kotlin"):
-                compilerId = 47
+                language = "kotlin"
             elif(language == "Python"):
-                compilerId = 116
+                language = "python3"
+            dict=data(code, language, input)
 
-            url = "https://c9aede1d.compilers.sphere-engine.com/api/v4/submissions?access_token=6ca0d8ef2707a6869ad9ba4098a94fbe"
-            access_token = "6ca0d8ef2707a6869ad9ba4098a94fbe"
-            input_data = input
-            files = {
-                'compilerId': (None, compilerId),
-                'source': code,
-                'input': (None, input_data)
-            }
-            headers = {
-                'Authorization': f'Bearer {access_token}'
-            }
-            response = requests.post(url, files=files, headers=headers)
-            id=response.json()['id']
-            dict=data(id)
-
-            m_output=dict["output"]
-
-            print(dict["status"])
-            print(dict["output"])
-            if(dict["status"] == "sucess"):
-                backgroundcolor="#4BB543"
-                messageTitle="Accepted"
-                messages.success(request, ' ')
-            elif(dict["status"] == "compilation error"):
+            m_output=dict['output']
+            if("error" in dict['output'].lower()):
                 backgroundcolor = "#c20e0e"
-                messageTitle="Compilation Error"
+                messageTitle="Error"
                 messages.success(request, ' ')
             else:
-                backgroundcolor = "#c20e0e"
-                messageTitle="Runtime Error"
+                backgroundcolor = "#4BB543"
+                messageTitle="Sucessful"
                 messages.success(request, ' ')
 
         user_data= problems.objects.all()
@@ -287,64 +264,3 @@ def addTestcase(request, questionId):
         return redirect(f"/edit/{questionId}")
     else:
         return redirect("/login/")
-    
-
-def runcode(request):
-    dictonary={}
-    if request.method == "POST":
-        language=request.POST.get("language")
-        code=request.POST.get("code")
-        input=request.POST.get("input")
-        output=request.POST.get("output")
-
-        if(language == "C"):
-            compilerId = 11
-        elif(language == "C#"):
-            compilerId = 86
-        elif(language == "C++"):
-            compilerId = 11
-        elif(language == "Go"):
-            compilerId = 114
-        elif(language == "Java"):
-            compilerId = 10
-        elif(language == "JavaScript"):
-            compilerId = 35
-        elif(language == "Kotlin"):
-            compilerId = 47
-        elif(language == "Python"):
-            compilerId = 116
-
-        url = "https://c9aede1d.compilers.sphere-engine.com/api/v4/submissions?access_token=6ca0d8ef2707a6869ad9ba4098a94fbe"
-        access_token = "6ca0d8ef2707a6869ad9ba4098a94fbe"
-        input_data = input
-        files = {
-            'compilerId': (None, compilerId),
-            'source': code,
-            'input': (None, input_data)
-        }
-        headers = {
-            'Authorization': f'Bearer {access_token}'
-        }
-        response = requests.post(url, files=files, headers=headers)
-        id=response.json()['id']
-        dict=data(id)
-
-        print(dict["status"])
-        print(dict["output"])
-        backgroundcolor=""
-        if(dict["status"] == "accepted"):
-            backgroundcolor="#4BB543"
-            messageTitle="Accepted"
-            messages.success(request, dict["output"])
-        elif(dict["status"] == "compilation error"):
-            backgroundcolor = "red"
-            messageTitle="Compilation Error"
-            messages.success(request, dict["output"])
-        else:
-            backgroundcolor = "red"
-            messageTitle="Runtime Error"
-            messages.success(request, dict["output"])
-
-            dictonary["b_color"] = backgroundcolor
-            dictonary["m_title"] = messageTitle
-    return(dictonary)

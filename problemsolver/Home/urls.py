@@ -14,5 +14,4 @@ urlpatterns = [
     path("edittestcase/<int:questionId>/<int:testcasenumber>", views.editTestcase, name="editTestcase"),
     path("deletetestcase/<int:questionId>/<int:testcasenumber>", views.deleteTestcase, name="deleteTestcase"),
     path("addtestcase/<int:questionId>", views.addTestcase, name="addTestcase"),
-    path("runcode/", views.runcode, name="runcode")
 ]

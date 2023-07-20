@@ -35,6 +35,9 @@
 
                         <label for="title" class="title" >Question</label></br>
                         <textarea type="text" class="question" placeholder="Enter the question ..." name="question" style="height: 25vh; width: 100%;">{{data.question}}</textarea></br>
+
+                        <label for="title" class="title" >Question</label></br>
+                        <textarea type="text" class="question" placeholder="Enter the question ..." name="question" style="height: 25vh; width: 100%;">{{data.question}}</textarea></br>
                     </form>
                     {% for testcase in testcases %}
                     <form method="post" action="/edittestcase/{{testcase.questionId}}/{{testcase.sno}}">

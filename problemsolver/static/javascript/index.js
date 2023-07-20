@@ -1,5 +1,6 @@
 function submitForm(){
     console.log("hello")
+    getSelectedOption()
     const form = document.querySelector('form');
     const code= document.getElementById('myTextarea');
 
