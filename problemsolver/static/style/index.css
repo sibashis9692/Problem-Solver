@@ -78,6 +78,7 @@ nav {
     border: 0px solid white;
     border-radius: 9px;
     background-color: #3effea;
+    cursor: pointer;
 }
 
 #logout{
@@ -86,6 +87,7 @@ nav {
     border: 0px solid white;
     border-radius: 9px;
     background-color: #3effea;
+    cursor: pointer;
 }
 .content {
     background-color: white;
@@ -196,6 +198,7 @@ textarea {
     border-radius: 9px;
     border: 0px solid rgb(255, 255, 255);
     margin-right: 4vw;
+    cursor: pointer;
 }
 
 

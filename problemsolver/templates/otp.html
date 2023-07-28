@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/otp.css' %}">
+</head>
+<body>
+    <div class="container">
+        <form id="myForm" method = "post" action="/otp_verification/">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <p>{{message}}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <input type="text" id="inputbox" placeholder="Enter the otp"name="otp">
+            <button type="submit" id="button">Send</button>
+        </form>
+    </div>
+</body>
+</html>
