@@ -74,8 +74,9 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    cursor: pointer;
     color: white;
+    border: 0px solid white;
+    cursor: pointer;
 }
 
 .second{
